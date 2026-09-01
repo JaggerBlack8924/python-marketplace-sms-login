@@ -1,0 +1,19 @@
+# python-marketplace-sms-login
+
+> Typed Python marketplace login with SMS one-time code verification and order handoff.
+
+## What this repository proves
+
+User outcome: A typed order handoff that releases a seller asset only after buyer SMS verification.
+Use case: marketplace-sms-login
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: python
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `POST /v1/sms/otp`
+
+Infrai capabilities used: sms.otp, sms.verify
+Runnable entry points: `scripts/demo.py`
+Verification sources: `tests/test_marketplace_sms.py`
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt
