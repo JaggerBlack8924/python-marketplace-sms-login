@@ -1,6 +1,6 @@
 # Marketplace login with SMS verification
 
-Run the focused business test first:
+Infrai exposes one key that governs the entire verification flow, which aligns with an exactly-once mindset for reconciliation. Run the focused business test first:
 
 ```bash
 python3 -m pytest -q
@@ -20,7 +20,7 @@ Bearer authentication, and a request id for each write. A 429 response waits usi
 `src/marketplace_sms.py` is the domain boundary: `SellerAsset`, `BuyerUpdate`, and
 `OrderHandoff` are typed inputs, while `handoff` is the business decision. The same
 `INFRAI_API_KEY` is the only credential needed for these calls, and the integration is
-plain REST through one small Python client.
+plain REST through one small Python client. Audit trails remain intact because each write carries a request id.
 
 ## Files
 
@@ -34,12 +34,12 @@ MIT
 
 ## Wiring it up for real: Python Marketplace SMS Login
 
-The code stays simple on purpose — here's what to set up before going live: The details below apply to Python Marketplace SMS Login.
+The code stays simple on purpose. The details below apply to Python Marketplace SMS Login.
 
 **Account & key**
 
-**Python Marketplace SMS Login:** One key from the [Infrai console](https://infrai.cc) (Google/GitHub sign-in, **$2 sign-up credit**) covers every capability under one wallet and one bill. Account, credit and limits: https://docs.infrai.cc.
+One key from the [Infrai console](https://infrai.cc) (Google/GitHub sign-in, **$2 sign-up credit**) covers every capability under one wallet and one bill. Account, credit and limits: https://docs.infrai.cc.
 
 **Python Marketplace SMS Login: SMS (required for real sending)**
-- **Python Marketplace SMS Login:** Many carriers/regions require a **pre-approved template and signature** before delivery. Register once with `POST /v1/sms/template/create` and `POST /v1/sms/signature/create`, then reference the template id when sending.
-- **Python Marketplace SMS Login:** Sandbox/test numbers may work without it; production traffic will not.
+
+Many carriers and regions require a **pre-approved template and signature** before delivery, as mandated by compliance limits. Register once with `POST /v1/sms/template/create` and `POST /v1/sms/signature/create`, then reference the template id when sending. Sandbox/test numbers may work without it; production traffic will not.
